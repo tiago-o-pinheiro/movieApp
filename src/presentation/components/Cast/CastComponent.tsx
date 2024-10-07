@@ -1,6 +1,5 @@
 import {gaps} from '@config/theme/gaps';
-import {StackParamList} from '@navigation/StackNavigator';
-import {StackScreenProps} from '@react-navigation/stack';
+
 import {View, Text, StyleSheet, Image} from 'react-native';
 
 import {FlatList} from 'react-native-gesture-handler';
