@@ -28,10 +28,13 @@ export const DetailsScreenHeader = ({
         ...styles.container,
         height: height * 0.25,
       }}>
-      <Image
-        source={{uri: backdrop}}
-        style={{height: height * 0.25, width: '100%', opacity: 0.7}}
-      />
+      {backdrop ? (
+        <Image
+          source={{uri: backdrop}}
+          style={{height: height * 0.25, width: '100%', opacity: 0.7}}
+        />
+      ) : null}
+
       <View
         style={{
           ...styles.backfilter,

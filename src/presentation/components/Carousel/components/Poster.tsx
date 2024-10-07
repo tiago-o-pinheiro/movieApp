@@ -26,7 +26,7 @@ export const Poster = ({
       onPress={onPress}
       style={({pressed}) => ({
         width,
-        height,
+        height: height,
         opacity: pressed ? 0.5 : 1,
         ...styles.pressable,
       })}>
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     shadowColor: '#818181',
-    shadowOffset: {width: 0, height: 10},
+    shadowOffset: {width: 0, height: 5},
     shadowOpacity: 0.3,
     shadowRadius: 7,
     elevation: 9,
@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   pressable: {
-    marginHorizontal: gaps.xxxs,
-    paddingHorizontal: gaps.xxxxs,
+    padding: gaps.xs,
   },
 });

@@ -4,11 +4,9 @@ import {fontSizes} from '@config/theme/fonts';
 import {gaps} from '@config/theme/gaps';
 import {Theme} from '@config/theme/theme';
 import {MovieDetail} from '@core/entities/movie.entity';
-import {useWindowDimensions, View, Image, Text, StyleSheet} from 'react-native';
+import {View, Image, Text, StyleSheet} from 'react-native';
 
 export const MovieHeader = ({movie}: {movie: MovieDetail}) => {
-  const {height} = useWindowDimensions();
-
   return (
     <View style={styles.content}>
       <Image

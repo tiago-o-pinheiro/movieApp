@@ -14,6 +14,9 @@ type ACTOR_PROPS = {
 };
 
 const Actor = ({name, character, avatar}: ACTOR_PROPS) => {
+  if (!avatar) {
+    return null;
+  }
   return (
     <View style={styles.movieCardContainer}>
       <Image source={{uri: avatar}} style={styles.movieImage} />
