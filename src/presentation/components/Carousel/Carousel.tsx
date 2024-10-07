@@ -15,28 +15,8 @@ import {StackParamList} from '@navigation/StackNavigator';
 import {gaps} from '@config/theme/gaps';
 import {CarouselProps, CarouselSize} from './Carousel.types';
 import {sizes} from '@config/theme/sizes';
-
-const SIZES = {
-  [CarouselSize.SMALL]: 0.3,
-  [CarouselSize.MEDIUM]: 0.6,
-  [CarouselSize.LARGE]: 0.75,
-  [CarouselSize.FULL]: 0.9,
-};
-
-const useCarouselDimensions = (size: CarouselSize) => {
-  const [dimensions, setDimensions] = useState({width: 0, height: 0});
-  const {width, height} = useWindowDimensions();
-  const sizeFactor = SIZES[size];
-
-  useEffect(() => {
-    setDimensions({
-      width: width * (sizeFactor + sizeFactor * 0.15),
-      height: height * sizeFactor,
-    });
-  }, [width, height, sizeFactor]);
-
-  return dimensions;
-};
+import {Theme} from '@config/theme/theme';
+import {useCarouselDimensions} from './hooks/use-carousel-dimensions';
 
 interface UIProps {
   data: Movie[];
@@ -122,8 +102,6 @@ export const Carousel = ({
     <View
       style={{
         ...styles.container,
-        height: height + sizes.m,
-        marginBottom: gaps.xs,
       }}>
       {title && <Text style={styles.title}>{title}</Text>}
       <UI data={movies} {...{width, height, type, loadNextPage}} />
@@ -134,10 +112,12 @@ export const Carousel = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginBottom: gaps.xs,
   },
   title: {
     fontSize: 30,
     marginHorizontal: gaps.xs,
     marginBottom: gaps.xxs,
+    ...Theme.textPrimary,
   },
 });

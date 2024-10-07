@@ -13,7 +13,7 @@ interface PosterProps {
 export const Poster = ({
   src,
   alt,
-  width = 300,
+  width = 320,
   height = 440,
   onPress,
 }: PosterProps) => {
@@ -41,15 +41,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    shadowColor: '#000',
+    shadowColor: '#818181',
     shadowOffset: {width: 0, height: 10},
     shadowOpacity: 0.3,
     shadowRadius: 7,
     elevation: 9,
+    borderRadius: 10,
   },
   image: {
     flex: 1,
     objectFit: 'cover',
+    borderRadius: 10,
   },
   pressable: {
     marginHorizontal: gaps.xxxs,

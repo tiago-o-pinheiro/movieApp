@@ -3,19 +3,23 @@ import {fontSizes} from '@config/theme/fonts';
 import {gaps} from '@config/theme/gaps';
 import {useNavigation} from '@react-navigation/native';
 import {View, Text, StyleSheet, Image, Platform, Pressable} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 interface DetailsScreenHeaderProps {
   backdrop?: string;
   height: number;
   rating: number;
+  title: string;
 }
 
 export const DetailsScreenHeader = ({
   backdrop,
   height,
   rating,
+  title,
 }: DetailsScreenHeaderProps) => {
-  const platform = Platform.OS;
+  const {top} = useSafeAreaInsets();
   const navigation = useNavigation();
 
   return (
@@ -36,16 +40,13 @@ export const DetailsScreenHeader = ({
       <View
         style={{
           ...styles.topContainer,
-          top: platform === 'ios' ? 35 : 0,
+          top,
         }}>
-        <Pressable onPress={navigation.goBack}>
-          <Text
-            style={{
-              color: 'white',
-              fontSize: fontSizes.s,
-            }}>
-            Return
+        <Pressable onPress={navigation.goBack} style={styles.goBackButton}>
+          <Text style={{alignSelf: 'flex-start', paddingTop: gaps.xxxxs}}>
+            <Icon name="arrow-back" size={20} color="white" />
           </Text>
+          <Text style={styles.title}>{title}</Text>
         </Pressable>
         <Rating rating={rating} />
       </View>
@@ -72,10 +73,21 @@ const styles = StyleSheet.create({
   },
   topContainer: {
     position: 'absolute',
-    padding: gaps.xs,
+    padding: gaps.xxs,
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  title: {
+    color: 'white',
+    alignSelf: 'flex-start',
+    fontSize: fontSizes.s,
+    fontWeight: 'bold',
+  },
+  goBackButton: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: gaps.xs,
   },
 });

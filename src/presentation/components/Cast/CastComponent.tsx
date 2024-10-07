@@ -5,6 +5,7 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {Cast} from '@core/entities/movie.entity';
 import {fontSizes} from '@config/theme/fonts';
+import {Theme} from '@config/theme/theme';
 
 type ACTOR_PROPS = {
   name: string;
@@ -14,18 +15,15 @@ type ACTOR_PROPS = {
 
 const Actor = ({name, character, avatar}: ACTOR_PROPS) => {
   return (
-    <View
-      style={{marginHorizontal: gaps.xxxs, height: 220, width: 90, flex: 1}}>
-      <Image
-        source={{uri: avatar}}
-        style={{
-          height: 150,
-          width: 90,
-          borderRadius: 5,
-        }}
-      />
-      <Text style={{textAlign: 'left', fontWeight: 'bold'}}>{name}</Text>
-      <Text style={{textAlign: 'left'}}>{character}</Text>
+    <View style={styles.movieCardContainer}>
+      <Image source={{uri: avatar}} style={styles.movieImage} />
+      <Text
+        style={{textAlign: 'left', fontWeight: 'bold', ...Theme.textPrimary}}>
+        {name}
+      </Text>
+      <Text style={{textAlign: 'left', ...Theme.textSecondary}}>
+        {character}
+      </Text>
     </View>
   );
 };
@@ -35,17 +33,8 @@ export const CastComponent = ({cast}: {cast?: Cast[]}) => {
     return null;
   }
   return (
-    <View style={{paddingBottom: gaps.s}}>
-      <Text
-        style={{
-          fontSize: fontSizes.s,
-          alignSelf: 'flex-start',
-          paddingLeft: gaps.xs,
-          fontWeight: 'bold',
-          marginBottom: gaps.xs,
-        }}>
-        Cast
-      </Text>
+    <View style={styles.content}>
+      <Text style={styles.title}>Cast</Text>
       <FlatList
         data={cast}
         horizontal
@@ -62,3 +51,30 @@ export const CastComponent = ({cast}: {cast?: Cast[]}) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  content: {
+    marginBottom: gaps.s,
+    flex: 1,
+  },
+  title: {
+    fontSize: fontSizes.s,
+    alignSelf: 'flex-start',
+    paddingLeft: gaps.xs,
+    fontWeight: 'bold',
+    marginBottom: gaps.xs,
+    ...Theme.textPrimary,
+  },
+  movieCardContainer: {
+    marginHorizontal: gaps.xxxs,
+    minHeight: 220,
+    width: 90,
+    height: '100%',
+  },
+  movieImage: {
+    height: 150,
+    width: 90,
+    borderRadius: 5,
+    marginBottom: gaps.xxs,
+  },
+});

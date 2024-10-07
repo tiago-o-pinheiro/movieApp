@@ -2,6 +2,7 @@ import {CarouselSize} from '@components/Carousel';
 import {Carousel} from '@components/Carousel/Carousel';
 import {Loader} from '@components/Loader/Loader';
 import {gaps} from '@config/theme/gaps';
+import {Theme} from '@config/theme/theme';
 import {useMovies} from '@hooks/use-movies';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -17,12 +18,11 @@ export const HomeScreen = () => {
   }
 
   return (
-    <ScrollView>
+    <ScrollView style={{...Theme.background}}>
       <View
         style={{
           ...styles.container,
           marginTop: gaps.xs + top,
-          paddingBottom: gaps.xs,
         }}>
         <Carousel movies={nowPlaying} size={CarouselSize.MEDIUM} />
         <Carousel
@@ -52,5 +52,7 @@ export const HomeScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    paddingBottom: gaps.xs,
+  },
 });
