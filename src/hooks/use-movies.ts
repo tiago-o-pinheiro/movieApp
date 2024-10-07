@@ -63,24 +63,29 @@ export const useMovies = () => {
   }, []);
 
   const initialLoad = async () => {
-    const [nowPlaying, popular, topRated, upcoming] = await Promise.all([
-      UseCases.moviesNowPlayingUseCase(movieDBFetcher),
-      UseCases.moviesPopularUseCase(movieDBFetcher),
-      UseCases.moviesTopRatedUseCase(movieDBFetcher),
-      UseCases.moviesUpComingUseCase(movieDBFetcher),
-    ]);
+    try {
+      const [nowPlaying, popular, topRated, upcoming] = await Promise.all([
+        UseCases.moviesNowPlayingUseCase(movieDBFetcher),
+        UseCases.moviesPopularUseCase(movieDBFetcher),
+        UseCases.moviesTopRatedUseCase(movieDBFetcher),
+        UseCases.moviesUpComingUseCase(movieDBFetcher),
+      ]);
 
-    setMovies({
-      nowPlaying: nowPlaying,
-      popular: popular.data,
-      topRated: topRated.data,
-      upcoming: upcoming.data,
-    });
-    options.current.popular.totalPages = popular.totalPages;
-    options.current.topRated.totalPages = topRated.totalPages;
-    options.current.upcoming.totalPages = upcoming.totalPages;
+      setMovies({
+        nowPlaying: nowPlaying,
+        popular: popular.data,
+        topRated: topRated.data,
+        upcoming: upcoming.data,
+      });
+      options.current.popular.totalPages = popular.totalPages;
+      options.current.topRated.totalPages = topRated.totalPages;
+      options.current.upcoming.totalPages = upcoming.totalPages;
 
-    setIsLoading(false);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      throw new Error('Error fetching movies');
+    }
   };
 
   const fetchNextPage = async (type: 'popular' | 'topRated' | 'upcoming') => {

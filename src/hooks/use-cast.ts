@@ -15,10 +15,14 @@ export const useCast = (movieId: number) => {
 
   useEffect(() => {
     const fetchMovie = async () => {
-      const cast = await UseCases.getCastUseCase(movieDBFetcher, movieId);
-
-      setCast(cast);
-      setIsLoading(false);
+      try {
+        const cast = await UseCases.getCastUseCase(movieDBFetcher, movieId);
+        setCast(cast);
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+        throw new Error('Error fetching movie');
+      }
     };
 
     fetchMovie();
