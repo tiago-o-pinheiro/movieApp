@@ -21,3 +21,11 @@ Welcome to the MovieApp, a simple React Native application designed to help you 
    ```sh
    npm start
    ```
+
+## Future Improvements
+
+1. Add Jest Test to components
+2. Add option to switch language
+3. Filter movies by genre
+4. Add option to rate a movie
+5. Switch Theme according to device setting
